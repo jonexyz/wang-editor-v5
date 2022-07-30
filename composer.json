@@ -1,14 +1,14 @@
 {
     "name": "jonexyz/wang-editor-v5",
-    "description": "description...",
+    "description": "laravel-admin  wangEditor5 extensions",
     "type": "library",
     "keywords": ["laravel-admin", "extension"],
-    "homepage": "https://github.com/laravel-admin-ext/wang-editor-v5",
+    "homepage": "https://github.com/jonexyz/wang-editor-v5",
     "license": "MIT",
     "authors": [
         {
-            "name": "your name",
-            "email": "your email"
+            "name": "Jone",
+            "email": "abc@jone.xyz"
         }
     ],
     "require": {
