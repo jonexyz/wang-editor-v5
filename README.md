@@ -3,6 +3,8 @@ laravel-admin extension
 
 ### wangEditor 5 富文本编辑器插件
 
+##### 仅限于 wangEditor 5 简单使用，满足基本的富文本编辑器需求，复杂的富文本编辑器使用场景，可参考此代码，依据 laravel-admin 文档描述的插件开发流程自行开发插件
+
 1. 仅适用与 laravel-admin 1.* 版本
 
 2. 食用步骤
@@ -16,14 +18,16 @@ php artisan vendor:publish --tag=wang-editor-v5
 
 ```
 
-3. 编辑器设置
+3. 编辑器设置，可以一个页面使用多个富文本编辑器
 
-'default' 表示默认配置
+'default' 表示默认配置，当数据表字段与配置键名不一致时，取 default 对应的配置
+
 
 'article' 表示针对数据表字段 'article' 使用 wangEditor 5 富文本编辑器插件
 
 ` $form->wangEditor('article', __('文章')); `
 
+设置信息参考如下：
 ```
 'extensions' => [
         'wang-editor-v5' => [
@@ -119,7 +123,9 @@ php artisan vendor:publish --tag=wang-editor-v5
 
             ],
             'article'=>[
-                'height'=>'100px',
+                'placeholder'=>'请输入内容...',
+                'height'=>'600px',
+                'width'=>'100%',
                
             ]
 
@@ -127,3 +133,95 @@ php artisan vendor:publish --tag=wang-editor-v5
     ],
 ```
 
+具体使用参考如下：
+```
+ protected function form()
+    {
+        $form = new Form(new Post());
+
+        $form->text('title', __('标题'));
+        
+        // 使用的是默认配置 default 
+        $form->wangEditor('content', __('内容'));
+        
+        // 使用的是配置 article 
+        $form->wangEditor('article', __('文章'));
+
+        return $form;
+    }
+```
+
+4. 图片上传api返回格式,
+参考官方文档：
+https://www.wangeditor.com/v5/menu-config.html#%E5%9B%BE%E7%89%87
+```
+// 单图
+{
+    "errno": 0, // 注意：值是数字，不能是字符串
+    "data": {
+        "url": "xxx", // 图片 src ，必须
+        "alt": "yyy", // 图片描述文字，非必须
+        "href": "zzz" // 图片的链接，非必须
+    }
+}
+
+// 多图
+{
+    "errno": 0, // 注意：值是数字，不能是字符串
+    "data": [
+         {
+            "url": "xxx", // 图片 src ，必须
+            "alt": "yyy", // 图片描述文字，非必须
+            "href": "zzz" // 图片的链接，非必须
+          },
+          {
+            "url": "xxx", // 图片 src ，必须
+            "alt": "yyy", // 图片描述文字，非必须
+            "href": "zzz" // 图片的链接，非必须
+          }    
+     ]
+}
+
+//图片上传失败
+{
+    "errno": 1, // 只要不等于 0 就行
+    "message": "失败信息"
+}
+
+```
+
+5. 视频上传api返回格式，参考官方文档：
+               https://www.wangeditor.com/v5/menu-config.html#%E8%A7%86%E9%A2%91
+```
+// 单个视频
+{
+    "errno": 0, // 注意：值是数字，不能是字符串
+    "data": {
+        "url": "xxx", // 视频 src ，必须
+        "poster": "xxx.png" // 视频封面图片 url ，可选
+    }
+}
+
+// 多个视频
+{
+    "errno": 0, // 注意：值是数字，不能是字符串
+    "data":[
+        {
+            "url": "xxx", // 视频 src ，必须
+            "poster": "xxx.png" // 视频封面图片 url ，可选
+        }, 
+        {
+            "url": "xxx", // 视频 src ，必须
+            "poster": "xxx.png" // 视频封面图片 url ，可选
+         }
+      ]
+}
+
+//上传失败的返回格式
+{
+    "errno": 1, // 只要不等于 0 就行
+    "message": "失败信息"
+}
+
+
+```
