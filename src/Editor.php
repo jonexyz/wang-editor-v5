@@ -42,18 +42,18 @@ class Editor extends Field
 
         $this->script = <<<EOT
 
-const E = window.wangEditor
+const E{$this->id} = window.wangEditor
 
     // 切换语言
-    const LANG = location.href.indexOf('lang=en') > 0 ? 'en' : 'zh-CN'
-    E.i18nChangeLanguage(LANG)
+    const LANG{$this->id} = location.href.indexOf('lang=en') > 0 ? 'en' : 'zh-CN'
+    E{$this->id}.i18nChangeLanguage(LANG{$this->id})
 
     // 初始化
-    let htmla = document.getElementById('input-{$this->id}').value
+    let htmla{$this->id} = document.getElementById('input-{$this->id}').value
 
-    window.editor = E.createEditor({
+    window.editor = E{$this->id}.createEditor({
       selector: '#{$this->id}',
-      html: htmla,
+      html: htmla{$this->id},
       config: {
         placeholder: '{$config['placeholder']}',
         MENU_CONF: {
@@ -64,21 +64,21 @@ const E = window.wangEditor
           // console.log(editor.getHtml())
 
           // 赋值给表单接收
-          document.getElementById('input-content').value = editor.getHtml()
+          document.getElementById('input-{$this->id}').value = editor.getHtml()
 
           // 选中文字
           const selectionText = editor.getSelectionText()
-          document.getElementById('selected-length').innerHTML = selectionText.length
+          document.getElementById('selected-length-{$this->id}').innerHTML = selectionText.length
           // 全部文字
           const text = editor.getText().replace('/\\n|\\r/mg', '')
-          document.getElementById('total-length').innerHTML = text.length
+          document.getElementById('total-length-{$this->id}').innerHTML = text.length
         }
       }
     })
 
-    window.toolbar = E.createToolbar({
+    window.toolbar = E{$this->id}.createToolbar({
       editor,
-      selector: '#editor-toolbar',
+      selector: '#editor-toolbar-{$this->id}',
       config: {}
     })
 EOT;

@@ -17,7 +17,7 @@
         @endphp
 
         <div style="border: 1px solid #ccc;">
-            <div id="editor-toolbar" style="border-bottom: 1px solid #ccc;"></div>
+            <div id="editor-toolbar-{{$id}}" style="border-bottom: 1px solid #ccc;"></div>
             <div id="{{$id}}" style="width: {{$with}}; height: {{$height}};">
                 @if(!empty(old($column, $value)))
 
@@ -28,8 +28,8 @@
         </div>
 
         <p style="background-color: #f1f1f1;">
-            文本长度: <span id="total-length"></span>；
-            所选文本长度: <span id="selected-length"></span>；
+            文本长度: <span id="total-length-{{$id}}"></span>；
+            所选文本长度: <span id="selected-length-{{$id}}"></span>；
         </p>
 
         <input id="input-{{$id}}" type="hidden" name="{{$name}}" value="{{ old($column, $value) }}" />
