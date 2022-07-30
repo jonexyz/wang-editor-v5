@@ -21,6 +21,7 @@ php artisan vendor:publish --tag=wang-editor-v5
 'default' 表示默认配置
 
 'article' 表示针对数据表字段 'article' 使用 wangEditor 5 富文本编辑器插件
+
 ` $form->wangEditor('article', __('文章')); `
 
 ```
