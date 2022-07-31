@@ -37,7 +37,7 @@ class Editor extends Field
         $config['uploadImage']['meta']['token'] = csrf_token();
         $uploadImage = json_encode($config['uploadImage']);
 
-        $config['uploadVideo']['meta']['token'] = csrf_token();
+        $config['uploadVideo']['meta']['_token'] = csrf_token();
         $uploadVideo = json_encode($config['uploadVideo']);
 
         $this->script = <<<EOT
