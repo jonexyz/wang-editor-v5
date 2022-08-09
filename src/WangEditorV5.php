@@ -4,7 +4,7 @@ namespace Jonexyz\WangEditorV5;
 
 use Encore\Admin\Extension;
 
-class wangEditorV5 extends Extension
+class WangEditorV5 extends Extension
 {
     public $name = 'wang-editor-v5';
 

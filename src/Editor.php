@@ -42,14 +42,14 @@ class Editor extends Field
 
         $this->script = <<<EOT
 
-const E{$this->id} = window.wangEditor
+const E{$this->id} = window.wangEditor;
 
     // 切换语言
-    const LANG{$this->id} = location.href.indexOf('lang=en') > 0 ? 'en' : 'zh-CN'
-    E{$this->id}.i18nChangeLanguage(LANG{$this->id})
+    const LANG{$this->id} = location.href.indexOf('lang=en') > 0 ? 'en' : 'zh-CN';
+    E{$this->id}.i18nChangeLanguage(LANG{$this->id});
 
     // 初始化
-    let htmla{$this->id} = document.getElementById('input-{$this->id}').value
+    let htmla{$this->id} = document.getElementById('input-{$this->id}').value;
 
     window.editor = E{$this->id}.createEditor({
       selector: '#{$this->id}',
@@ -74,13 +74,13 @@ const E{$this->id} = window.wangEditor
           document.getElementById('total-length-{$this->id}').innerHTML = text.length
         }
       }
-    })
+    });
 
     window.toolbar = E{$this->id}.createToolbar({
       editor,
       selector: '#editor-toolbar-{$this->id}',
       config: {}
-    })
+    });
 EOT;
         return parent::render();
     }
