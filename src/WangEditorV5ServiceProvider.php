@@ -32,5 +32,8 @@ class WangEditorV5ServiceProvider extends ServiceProvider
             Form::extend('wangEditor', Editor::class);
         });
 
+        $this->app->booted(function () {
+            WangEditorV5::routes(__DIR__.'/../routes/web.php');
+        });
     }
 }

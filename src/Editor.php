@@ -34,9 +34,19 @@ class Editor extends Field
 
         ], $config, $this->options);
 
+        // 没有设置上传图片api 则使用默认的
+        if(empty($config['uploadImage']['server'])){
+            $config['uploadImage']['server'] = $this->imgApi();
+            $config['uploadImage']['fieldName'] = 'images';
+        }
         $config['uploadImage']['meta']['_token'] = csrf_token();
         $uploadImage = json_encode($config['uploadImage']);
 
+        // 没有设置上传视频api 则使用默认的
+        if(empty($config['uploadVideo']['server'])){
+            $config['uploadVideo']['server'] = $this->videoApi();
+            $config['uploadVideo']['fieldName'] = 'videos';
+        }
         $config['uploadVideo']['meta']['_token'] = csrf_token();
         $uploadVideo = json_encode($config['uploadVideo']);
 
@@ -83,5 +93,22 @@ const E{$this->id} = window.wangEditor;
     });
 EOT;
         return parent::render();
+    }
+
+    private function imgApi()
+    {
+        $base = $this->getBaseRoute();
+        return '/'.$base.'/wangeditorv5_img_upload';
+    }
+
+    private function videoApi()
+    {
+        $base = $this->getBaseRoute();
+        return '/'.$base.'/wangeditorv5_video_upload';
+    }
+
+    private function getBaseRoute()
+    {
+        return config('admin.route.prefix');
     }
 }
