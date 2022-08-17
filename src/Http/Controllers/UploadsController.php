@@ -31,6 +31,7 @@ class UploadsController extends Controller
 
             $file = $request->file('images'); //接前台图片
             $clientName = $file->getClientOriginalName();
+            $size = $file->getSize();
             // $tmpName = $file->getFileName();
             // $realPath = $file->getRealPath();
 
@@ -51,7 +52,7 @@ class UploadsController extends Controller
                 'href'=>'/'.$path
 
             ];
-            $this->callbackUpload($path,$file->getSize(),1);
+            $this->callbackUpload($path,$size,1);
             return $res = ['errno' => 0, 'data' => $path_arr];
         }
     }
@@ -65,6 +66,7 @@ class UploadsController extends Controller
 
             $file = $request->file('videos'); //接前台图片
             $clientName = $file->getClientOriginalName();
+            $size = $file->getSize();
             // $tmpName = $file->getFileName();
             // $realPath = $file->getRealPath();
 
@@ -84,7 +86,7 @@ class UploadsController extends Controller
                 'href'=>'/'.$path
 
             ];
-            $this->callbackUpload($path,$file->getSize(),2);
+            $this->callbackUpload($path,$size,2);
             return $res = ['errno' => 0, 'data' => $path_arr];
         }
     }
