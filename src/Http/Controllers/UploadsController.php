@@ -51,6 +51,7 @@ class UploadsController extends Controller
                 'href'=>'/'.$path
 
             ];
+            $this->callbackUpload($path,$file->getSize(),1);
             return $res = ['errno' => 0, 'data' => $path_arr];
         }
     }
@@ -83,6 +84,7 @@ class UploadsController extends Controller
                 'href'=>'/'.$path
 
             ];
+            $this->callbackUpload($path,$file->getSize(),2);
             return $res = ['errno' => 0, 'data' => $path_arr];
         }
     }
@@ -104,6 +106,18 @@ class UploadsController extends Controller
             $arr = explode('.',$clientName);
             $arr[0] = $arr[0].'-'.$i;
             $clientName  = implode('.',$arr);
+        }
+    }
+
+    /**
+     * @param $path string 文件路径
+     * @param $size int 文件大小
+     * @param $type int 1 img, 2 video
+     */
+    private function callbackUpload($path,$size,$type)
+    {
+        if(function_exists('wangeditor5_uplaod_callback')){
+            wangeditor5_uplaod_callback($path,$size,$type);
         }
     }
 }
